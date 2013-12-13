@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TimeLapse.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="StartTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">11/27/2013 05:00:00</Value>
+    </Setting>
+    <Setting Name="StopTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">11/27/2013 18:00:00</Value>
+    </Setting>
+    <Setting Name="GrabFrequency" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="CameraURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://192.168.0.20/snapshot.cgi?chan=0</Value>
+    </Setting>
+    <Setting Name="UploadURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://ssessner.noip.us/webcam/pictureUpload.php</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
