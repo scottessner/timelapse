@@ -12,7 +12,7 @@ namespace TimeLapse
     [Serializable]
     public class Frame
     {
-        public Image Image { get; set; }
+        public byte[] Image { get; set; }
         public DateTime CaptureTime { get; set; }
         public string FrameSourceID { get; set; }
         
