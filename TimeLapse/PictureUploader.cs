@@ -54,7 +54,7 @@ namespace TimeLapse
             try
             {
                 HttpContent stackValue = new StringContent(Count().ToString());
-                HttpContent fileContent = new StreamContent(image.ToStream());
+                //HttpContent fileContent = new StreamContent(image.ToStream());
 
                 using(var client = new HttpClient())
                 using (var formdata = new MultipartFormDataContent())

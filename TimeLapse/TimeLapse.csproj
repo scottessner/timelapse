@@ -83,7 +83,7 @@
     </Compile>
     <Compile Include="GrabTimer.cs" />
     <Compile Include="FrameController.cs" />
-    <Compile Include="FrameSource.cs" />
+    <Compile Include="IFrameSource.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="PictureUploader.cs" />
     <Compile Include="Program.cs" />

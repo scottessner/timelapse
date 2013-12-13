@@ -12,7 +12,27 @@ namespace TimeLapse
     [Serializable]
     public class Frame
     {
-        public byte[] Image { get; set; }
+
+        public byte[] ImageBytes;
+
+        [XmlIgnoreAttribute]
+        public Image Image 
+        {
+            get 
+            {
+                if (ImageBytes != null)
+                    return Image.FromStream(new MemoryStream(ImageBytes));
+                else return null;
+            }
+            set
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    value.Save(ms, value.RawFormat);
+                    ImageBytes = ms.ToArray();
+                }
+            }
+        }
         public DateTime CaptureTime { get; set; }
         public string FrameSourceID { get; set; }
         
@@ -36,20 +56,18 @@ namespace TimeLapse
             }
         }
 
-        public Stream ToStream()
+        public static Frame FromStream(Stream inStream)
         {
-            var stream = new System.IO.MemoryStream();
-            Image.Save(stream, Image.RawFormat);
-            stream.Position = 0;
-            return stream;
+            using (StreamReader reader = new StreamReader(inStream))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Frame));
+                return (Frame)serializer.Deserialize(reader);
+            }
         }
 
         public static Frame FromFile(string fileName)
         {
-            StreamReader reader = new StreamReader(fileName);
-            XmlSerializer serializer = new XmlSerializer(typeof(Frame));
-            Frame newFrame = (Frame)serializer.Deserialize(reader);
-            return newFrame;
+            return FromStream(new FileStream(fileName,FileMode.Open));
         }
 
     }

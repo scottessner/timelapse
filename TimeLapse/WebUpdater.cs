@@ -50,7 +50,7 @@ namespace TimeLapse
 
                     currentImage.Save(savePath);
 
-                    //result = new Frame(savePath);
+                   //result = new Frame(savePath);
                 }
             }
             catch (Exception ex)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
 using System.Net.Http;
 
 namespace TimeLapse
@@ -30,13 +31,13 @@ namespace TimeLapse
             Frame newFrame = new Frame();
             newFrame.CaptureTime = DateTime.Now;
             newFrame.FrameSourceID = this.UniqueID;
-            newFrame.Image = CaptureImage();
+            newFrame.ImageBytes = CaptureImage();
             return newFrame;
         }
 
-        private Image CaptureImage()
+        private byte[] CaptureImage()
         {
-            Image grabbedImage = null;
+            byte[] grabbedImage = null;
 
             //Grab Image using HTTP
             using (var client = new HttpClient())
@@ -44,7 +45,7 @@ namespace TimeLapse
                 var response = client.GetAsync(CameraURL).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    grabbedImage = Image.FromStream(response.Content.ReadAsStreamAsync().Result);
+                    grabbedImage = response.Content.ReadAsByteArrayAsync().Result;
                 }
             }
             return grabbedImage;
