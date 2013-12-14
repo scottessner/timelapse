@@ -12,7 +12,6 @@ namespace TimeLapse
     [Serializable]
     public class Frame
     {
-
         public byte[] ImageBytes;
 
         [XmlIgnoreAttribute]
@@ -34,6 +33,7 @@ namespace TimeLapse
             }
         }
         public DateTime CaptureTime { get; set; }
+        public IFrameSource FrameSource { get; set; }
         public string FrameSourceID { get; set; }
         
         public Frame()
