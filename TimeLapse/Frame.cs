@@ -57,26 +57,25 @@ namespace TimeLapse
             }
         }
 
-        public string Upload(string URL)
+        public bool Upload(Uri URL)
         {
-            //HttpContent FrameSourceID = new StringContent(FrameSourceID);
-            //HttpContent fileContent = new ByteArrayContent(ImageBytes);
-
             using (var client = new HttpClient())
             using (var formdata = new MultipartFormDataContent())
             {
                 formdata.Add(new StringContent(FrameSourceID), "FrameSourceID");
                 formdata.Add(new StringContent(CaptureTime.ToString("yyyyMMdd-HHmmss")),"CaptureTime");
                 formdata.Add(new ByteArrayContent(ImageBytes), "ImageBytes");
+
                 var response = client.PostAsync(URL, formdata).Result;
-                if (!response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode)
                 {
-                    return "";
+                    if (response.Content.ReadAsStringAsync().Result == "success")
+                    {
+                        return true;
+                    }                    
                 }
-                else
-                {
-                    return response.Content.ReadAsStringAsync().Result;
-                }
+
+                return false;
             }
         }
 
