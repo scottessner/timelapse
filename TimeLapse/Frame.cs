@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Xml.Serialization;
+using System.Net.Http;
 
 namespace TimeLapse
 {
@@ -53,6 +54,29 @@ namespace TimeLapse
             using (TextWriter xmlWriter = new StreamWriter(fileName))
             {
                 serializer.Serialize(xmlWriter, this);
+            }
+        }
+
+        public string Upload(string URL)
+        {
+            //HttpContent FrameSourceID = new StringContent(FrameSourceID);
+            //HttpContent fileContent = new ByteArrayContent(ImageBytes);
+
+            using (var client = new HttpClient())
+            using (var formdata = new MultipartFormDataContent())
+            {
+                formdata.Add(new StringContent(FrameSourceID), "FrameSourceID");
+                formdata.Add(new StringContent(CaptureTime.ToString("yyyyMMdd-HHmmss")),"CaptureTime");
+                formdata.Add(new ByteArrayContent(ImageBytes), "ImageBytes");
+                var response = client.PostAsync(URL, formdata).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    return "";
+                }
+                else
+                {
+                    return response.Content.ReadAsStringAsync().Result;
+                }
             }
         }
 
