@@ -22,9 +22,10 @@ namespace TimeLapse
         PictureUploader uploader;
         IFrameSource frameSource;
 
-        public FrameController(IFrameSource FrameSource)
+        public FrameController(IFrameSource FrameSource, string UploadURL)
         {
             this.frameSource = FrameSource;
+            this.uploader = new PictureUploader("www.everinview.com/pictureUpload.php", 1);
         }
 
         public Frame GrabFromCamera() 
@@ -33,9 +34,9 @@ namespace TimeLapse
             return thisFrame;
         }
 
-        public bool UploadToServer(Frame frame, string URL) 
+        public void UploadToServer(Frame frame) 
         {
-            return frame.Upload(URL);
+            uploader.SendImage(frame);
         }
 
         public void SaveImageToFile() { }

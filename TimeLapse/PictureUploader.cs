@@ -10,21 +10,20 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.ComponentModel;
 
 namespace TimeLapse
 {
-    public class PictureUploader
+    public class PictureUploader 
     {
         
         private Uri url;
-        private DirectoryInfo fromDirectory;
-        private DirectoryInfo toDirectory;
 
         BlockingCollection<Frame> _taskQ = new BlockingCollection<Frame>(new ConcurrentStack<Frame>());
-        
+        public int Count { get; set; }
+
         public PictureUploader(string url, int workerCount)
         {
-            
             this.url = new Uri(url);
 
             // Create and start a separate Task for each consumer:
@@ -44,7 +43,7 @@ namespace TimeLapse
                 UploadImage(image);     // Perform task.
         }
 
-        public int Count()
+        public int GetCount()
         {
             return _taskQ.Count();
         }
@@ -53,24 +52,7 @@ namespace TimeLapse
         {
             try
             {
-                HttpContent stackValue = new StringContent(Count().ToString());
-                //HttpContent fileContent = new StreamContent(image.ToStream());
-
-                using(var client = new HttpClient())
-                using (var formdata = new MultipartFormDataContent())
-                {
-                    formdata.Add(stackValue, "stack");
-                    //formdata.Add(fileContent, "file1", image.fileName);
-                    var response = client.PostAsync(url, formdata).Result;
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        return "";
-                    }
-                    else
-                    {
-                        return response.Content.ReadAsStringAsync().Result;
-                    }
-                }
+                image.Upload(url);
             }
             catch (Exception ex)
             {

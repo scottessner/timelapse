@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Xml.Serialization;
 using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace TimeLapse
 {
@@ -44,6 +45,8 @@ namespace TimeLapse
 
         public void Save(Stream stream)
         {
+            JsonSerializer ser = new JsonSerializer();
+            ser.Serialize(
             XmlSerializer serializer = new XmlSerializer(typeof(Frame));
             serializer.Serialize(stream, this);
         }

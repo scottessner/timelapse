@@ -21,7 +21,12 @@ namespace TimeLapse
         {
             get { return "http://" + IPAddress + "snapshot.cgi?chan=0"; }
         }
-        
+
+        public UbiquitiAirCamFrameSource(string IPAddress, string UniqueID)
+        {
+            this.IPAddress = IPAddress;
+            this.UniqueID = UniqueID;
+        }
 
         public string UniqueID { get; set; }
 
