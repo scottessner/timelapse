@@ -14,15 +14,19 @@ namespace TimeLapse
     [Serializable]
     public class Frame
     {
+        [JsonProperty(PropertyName = "imageBytes")]
         public byte[] ImageBytes;
 
-        [XmlIgnoreAttribute]
+        [JsonIgnore]
         public Image Image 
         {
             get 
             {
                 if (ImageBytes != null)
-                    return Image.FromStream(new MemoryStream(ImageBytes));
+                    using (MemoryStream memStream = new MemoryStream(ImageBytes))
+                    {
+                        return Image.FromStream(memStream);
+                    }
                 else return null;
             }
             set
@@ -34,9 +38,11 @@ namespace TimeLapse
                 }
             }
         }
+        [JsonProperty(PropertyName = "captureTime")]
         public DateTime CaptureTime { get; set; }
-        public IFrameSource FrameSource { get; set; }
-        public string FrameSourceID { get; set; }
+
+        [JsonProperty(PropertyName = "camera_id")]
+        public int CameraID { get; set; }
         
         public Frame()
         {
@@ -45,40 +51,18 @@ namespace TimeLapse
 
         public void Save(Stream stream)
         {
-            JsonSerializer ser = new JsonSerializer();
-            ser.Serialize(
-            XmlSerializer serializer = new XmlSerializer(typeof(Frame));
-            serializer.Serialize(stream, this);
+            string output = JsonConvert.SerializeObject(this);
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.Write(output);
+            }
         }
 
         public void Save(string fileName)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Frame));
-            using (TextWriter xmlWriter = new StreamWriter(fileName))
+            using (FileStream stream = new FileStream(fileName,FileMode.OpenOrCreate,FileAccess.ReadWrite))
             {
-                serializer.Serialize(xmlWriter, this);
-            }
-        }
-
-        public bool Upload(Uri URL)
-        {
-            using (var client = new HttpClient())
-            using (var formdata = new MultipartFormDataContent())
-            {
-                formdata.Add(new StringContent(FrameSourceID), "FrameSourceID");
-                formdata.Add(new StringContent(CaptureTime.ToString("yyyyMMdd-HHmmss")),"CaptureTime");
-                formdata.Add(new ByteArrayContent(ImageBytes), "ImageBytes");
-
-                var response = client.PostAsync(URL, formdata).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    if (response.Content.ReadAsStringAsync().Result == "success")
-                    {
-                        return true;
-                    }                    
-                }
-
-                return false;
+                Save(stream);
             }
         }
 
@@ -86,8 +70,7 @@ namespace TimeLapse
         {
             using (StreamReader reader = new StreamReader(inStream))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Frame));
-                return (Frame)serializer.Deserialize(reader);
+                return JsonConvert.DeserializeObject<Frame>(reader.ReadToEnd());  
             }
         }
 

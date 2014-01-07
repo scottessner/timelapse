@@ -53,10 +53,32 @@ namespace TimeLapse
             try
             {
                 image.Upload(url);
+                return "Success!";
             }
             catch (Exception ex)
             {
                 return ex.Message;
+            }
+
+        }
+
+        public bool Upload(Stream myFrame, string URL)
+        {
+            using (var client = new HttpClient())
+            using (var content = new StreamContent(myFrame))
+            {
+                content.Headers.Add("Content-type", "application/json");
+
+                var response = client.PostAsync(URL, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    if (response.Content.ReadAsStringAsync().Result == "success")
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
             }
         }
     }

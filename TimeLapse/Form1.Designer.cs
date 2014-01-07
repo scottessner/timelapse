@@ -40,6 +40,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.saveButton = new System.Windows.Forms.Button();
+            this.chooseImageButton = new System.Windows.Forms.Button();
+            this.captureButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -120,16 +122,38 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // chooseImageButton
+            // 
+            this.chooseImageButton.Location = new System.Drawing.Point(33, 92);
+            this.chooseImageButton.Name = "chooseImageButton";
+            this.chooseImageButton.Size = new System.Drawing.Size(75, 37);
+            this.chooseImageButton.TabIndex = 0;
+            this.chooseImageButton.Text = "Choose Image";
+            this.chooseImageButton.UseVisualStyleBackColor = true;
+            this.chooseImageButton.Click += new System.EventHandler(this.chooseImageButton_Click);
+            // 
+            // captureButton
+            // 
+            this.captureButton.Location = new System.Drawing.Point(33, 146);
+            this.captureButton.Name = "captureButton";
+            this.captureButton.Size = new System.Drawing.Size(75, 23);
+            this.captureButton.TabIndex = 6;
+            this.captureButton.Text = "Capture";
+            this.captureButton.UseVisualStyleBackColor = true;
+            this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 410);
+            this.Controls.Add(this.captureButton);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.chooseImageButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.openButton);
             this.Name = "Form1";
@@ -156,6 +180,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button chooseImageButton;
+        private System.Windows.Forms.Button captureButton;
     }
 }
 

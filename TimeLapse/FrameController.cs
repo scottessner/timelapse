@@ -20,22 +20,27 @@ namespace TimeLapse
         List<Frame> myFrames = new List<Frame>();
         GrabTimer timer;
         PictureUploader uploader;
-        IFrameSource frameSource;
+        ICamera camera;
 
-        public FrameController(IFrameSource FrameSource, string UploadURL)
+        public FrameController(ICamera Camera, string UploadURL)
         {
-            this.frameSource = FrameSource;
-            this.uploader = new PictureUploader("www.everinview.com/pictureUpload.php", 1);
+            this.camera = Camera;
+            this.uploader = new PictureUploader("test.everinview.com/frames", 1);
         }
 
         public Frame GrabFromCamera() 
         {
-            Frame thisFrame = frameSource.CaptureFrame();
+            Frame thisFrame = camera.CaptureFrame();
             return thisFrame;
         }
 
         public void UploadToServer(Frame frame) 
         {
+            using (Stream myStream = new MemoryStream())
+            {
+                frame.Save(myStream);
+                uploader.Upload(myStream, UploadURL);
+            }
             uploader.SendImage(frame);
         }
 

@@ -8,34 +8,28 @@ using System.Net.Http;
 
 namespace TimeLapse
 {
-    class UbiquitiAirCamFrameSource : IFrameSource
+    class UbiquitiAirCam : ICamera
     {
-        //Public info for this Type of FrameSource
-        public string Manufacturer { get { return "Ubiquiti"; } }
-        public string ModelNumber { get { return "AirCam"; } }
-        public int WidthNative { get { return 1280; } }
-        public int HeightNative { get { return 720; } }
-
         public string IPAddress { get; set; }
         private string CameraURL
         {
             get { return "http://" + IPAddress + "snapshot.cgi?chan=0"; }
         }
 
-        public UbiquitiAirCamFrameSource(string IPAddress, string UniqueID)
+        public UbiquitiAirCam(string IPAddress, int UniqueID)
         {
             this.IPAddress = IPAddress;
             this.UniqueID = UniqueID;
         }
 
-        public string UniqueID { get; set; }
+        public int UniqueID { get; private set; }
 
 
         public Frame CaptureFrame()
         {
             Frame newFrame = new Frame();
             newFrame.CaptureTime = DateTime.Now;
-            newFrame.FrameSourceID = this.UniqueID;
+            newFrame.CameraID = this.UniqueID;
             newFrame.ImageBytes = CaptureImage();
             return newFrame;
         }
