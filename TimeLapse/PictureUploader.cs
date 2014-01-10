@@ -52,7 +52,7 @@ namespace TimeLapse
         {
             try
             {
-                image.Upload(url);
+                //image.Upload(url);
                 return "Success!";
             }
             catch (Exception ex)

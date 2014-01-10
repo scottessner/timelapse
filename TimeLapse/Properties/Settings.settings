@@ -15,7 +15,10 @@
       <Value Profile="(Default)">http://192.168.0.20/snapshot.cgi?chan=0</Value>
     </Setting>
     <Setting Name="UploadURL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://ssessner.noip.us/webcam/pictureUpload.php</Value>
+      <Value Profile="(Default)">http://test.everinview.com/frames</Value>
+    </Setting>
+    <Setting Name="SavePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\ssessner\Pictures\TimeLapse</Value>
     </Setting>
   </Settings>
 </SettingsFile>

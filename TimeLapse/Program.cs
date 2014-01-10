@@ -20,6 +20,7 @@ namespace TimeLapse
         [STAThread]
         static void Main()
         {
+            FrameController controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
             //timer.StartTime = Properties.Settings.Default.StartTime;
             //timer.StopTime = Properties.Settings.Default.StopTime;
             //timer.GrabTriggered += new EventHandler<GrabTimerEventArgs>(timer_GrabTriggered);

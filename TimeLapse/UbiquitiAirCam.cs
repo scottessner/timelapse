@@ -13,7 +13,7 @@ namespace TimeLapse
         public string IPAddress { get; set; }
         private string CameraURL
         {
-            get { return "http://" + IPAddress + "snapshot.cgi?chan=0"; }
+            get { return "http://" + IPAddress + "/snapshot.cgi?chan=0"; }
         }
 
         public UbiquitiAirCam(string IPAddress, int UniqueID)
@@ -31,7 +31,10 @@ namespace TimeLapse
             newFrame.CaptureTime = DateTime.Now;
             newFrame.CameraID = this.UniqueID;
             newFrame.ImageBytes = CaptureImage();
-            return newFrame;
+            if (newFrame.ImageBytes != null)
+                return newFrame;
+            else
+                return null;
         }
 
         private byte[] CaptureImage()
@@ -42,9 +45,11 @@ namespace TimeLapse
             using (var client = new HttpClient())
             {
                 var response = client.GetAsync(CameraURL).Result;
+                
                 if (response.IsSuccessStatusCode)
                 {
                     grabbedImage = response.Content.ReadAsByteArrayAsync().Result;
+                    System.Windows.Forms.MessageBox.Show("Got Image");
                 }
             }
             return grabbedImage;
