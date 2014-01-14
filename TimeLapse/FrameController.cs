@@ -13,21 +13,34 @@ namespace TimeLapse
     class FrameController
     {
         Intervalometer intervalometer;
-        PictureUploader uploader;
+        FrameServerConnection server;
         ICamera camera;
 
         public FrameController(ICamera Camera)
         {
             this.camera = Camera;
             this.intervalometer = new Intervalometer(camera, Settings.Default.GrabFrequency);
-            this.uploader = new PictureUploader(Settings.Default.UploadURL, 1);
             intervalometer.FrameReady += intervalometer_FrameReady;
+
+            this.server = new FrameServerConnection(Settings.Default.UploadURL, 1);
+            server.UploadComplete += server_UploadComplete;
+        }
+
+        void server_UploadComplete(object sender, UploadCompleteEventArgs e)
+        {
+            if (!e.success)
+            {
+                string fileName = Settings.Default.SavePath + e.frame.CameraID + e.frame.CaptureTime.ToString("yyyyMMddHHmmss");
+                e.frame.Save(fileName);
+            }
         }
 
         void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
         {
-            throw new NotImplementedException();
+            server.Upload(args.frame);
         }
+
+
 
         public Frame GrabFromCamera() 
         {
