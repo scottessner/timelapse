@@ -6,11 +6,10 @@ using System.Net.Http;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-using TimeLapse.Properties;
 
-namespace TimeLapse
+namespace TimeLapse_Core
 {
-    class FrameController
+    public class FrameController
     {
         Intervalometer intervalometer;
         FrameServerConnection server;
@@ -19,10 +18,10 @@ namespace TimeLapse
         public FrameController(ICamera Camera)
         {
             this.camera = Camera;
-            this.intervalometer = new Intervalometer(camera, Settings.Default.GrabFrequency);
+            this.intervalometer = new Intervalometer(camera, CoreSettings.Default.GrabFrequency);
             intervalometer.FrameReady += intervalometer_FrameReady;
 
-            this.server = new FrameServerConnection(Settings.Default.UploadURL, 1);
+            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 1);
             server.UploadComplete += server_UploadComplete;
         }
 
@@ -30,7 +29,7 @@ namespace TimeLapse
         {
             if (!e.success)
             {
-                string fileName = Settings.Default.SavePath + e.frame.CameraID + e.frame.CaptureTime.ToString("yyyyMMddHHmmss");
+                string fileName = CoreSettings.Default.SavePath + e.frame.CameraID + e.frame.CaptureTime.ToString("yyyyMMddHHmmss");
                 e.frame.Save(fileName);
             }
         }

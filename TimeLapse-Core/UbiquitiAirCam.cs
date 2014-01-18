@@ -6,9 +6,9 @@ using System.Drawing;
 using System.IO;
 using System.Net.Http;
 
-namespace TimeLapse
+namespace TimeLapse_Core
 {
-    class UbiquitiAirCam : ICamera
+    public class UbiquitiAirCam : ICamera
     {
         public string IPAddress { get; set; }
         private string CameraURL
@@ -49,7 +49,6 @@ namespace TimeLapse
                 if (response.IsSuccessStatusCode)
                 {
                     grabbedImage = response.Content.ReadAsByteArrayAsync().Result;
-                    System.Windows.Forms.MessageBox.Show("Got Image");
                 }
             }
             return grabbedImage;

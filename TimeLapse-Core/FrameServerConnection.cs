@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.ComponentModel;
 
-namespace TimeLapse
+namespace TimeLapse_Core
 {
     public class FrameServerConnection 
     {

@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 using System.Net.Http;
 using Newtonsoft.Json;
 
-namespace TimeLapse
+namespace TimeLapse_Core
 {
     [Serializable]
     public class Frame

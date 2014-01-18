@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
+using TimeLapse_Core;
 
 namespace TimeLapse
 {
@@ -62,11 +63,11 @@ namespace TimeLapse
 
         private void captureButton_Click(object sender, EventArgs e)
         {
-            UbiquitiAirCam source = new UbiquitiAirCam("192.168.0.20", 5);
-            myFrame = source.CaptureFrame();
-            dateTimePicker1.Value = myFrame.CaptureTime;
-            pictureBox1.Image = myFrame.Image;
-            textBox2.Text = myFrame.CameraID.ToString();
+            //UbiquitiAirCam source = new UbiquitiAirCam("192.168.0.20", 5);
+            //myFrame = source.CaptureFrame();
+            //dateTimePicker1.Value = myFrame.CaptureTime;
+            //pictureBox1.Image = myFrame.Image;
+            //textBox2.Text = myFrame.CameraID.ToString();
         }
 
     }

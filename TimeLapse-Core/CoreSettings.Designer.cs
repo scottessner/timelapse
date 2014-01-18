@@ -8,90 +8,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TimeLapse.Properties {
+namespace TimeLapse_Core {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class CoreSettings : global::System.Configuration.ApplicationSettingsBase {
         
-        private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        private static CoreSettings defaultInstance = ((CoreSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new CoreSettings())));
         
-        public static Settings Default {
+        public static CoreSettings Default {
             get {
                 return defaultInstance;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 05:00:00")]
         public global::System.DateTime StartTime {
             get {
                 return ((global::System.DateTime)(this["StartTime"]));
             }
-            set {
-                this["StartTime"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 18:00:00")]
         public global::System.DateTime StopTime {
             get {
                 return ((global::System.DateTime)(this["StopTime"]));
             }
-            set {
-                this["StopTime"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10000")]
         public int GrabFrequency {
             get {
                 return ((int)(this["GrabFrequency"]));
             }
-            set {
-                this["GrabFrequency"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.0.20/snapshot.cgi?chan=0")]
-        public string CameraURL {
-            get {
-                return ((string)(this["CameraURL"]));
-            }
-            set {
-                this["CameraURL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://test.everinview.com/")]
         public string UploadURL {
             get {
                 return ((string)(this["UploadURL"]));
             }
-            set {
-                this["UploadURL"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\ssessner\\Pictures\\TimeLapse")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string SavePath {
             get {
                 return ((string)(this["SavePath"]));
-            }
-            set {
-                this["SavePath"] = value;
             }
         }
     }

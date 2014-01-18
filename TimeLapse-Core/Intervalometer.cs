@@ -5,7 +5,7 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 
-namespace TimeLapse
+namespace TimeLapse_Core
 {
     public class Intervalometer
     {

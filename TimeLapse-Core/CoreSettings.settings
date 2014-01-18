@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TimeLapse_Core" GeneratedClassName="CoreSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="StartTime" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">11/27/2013 05:00:00</Value>
+    </Setting>
+    <Setting Name="StopTime" Type="System.DateTime" Scope="Application">
+      <Value Profile="(Default)">11/27/2013 18:00:00</Value>
+    </Setting>
+    <Setting Name="GrabFrequency" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">10000</Value>
+    </Setting>
+    <Setting Name="UploadURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://test.everinview.com/</Value>
+    </Setting>
+    <Setting Name="SavePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

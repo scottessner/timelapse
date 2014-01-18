@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
+using TimeLapse_Core;
 
 namespace TimeLapse
 {
