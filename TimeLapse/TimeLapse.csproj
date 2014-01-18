@@ -111,6 +111,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RaspberryPiCam.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="UbiquitiAirCam.cs" />
     <Compile Include="WebUpdater.cs" />
