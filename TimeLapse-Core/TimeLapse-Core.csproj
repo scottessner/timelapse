@@ -52,6 +52,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>CoreSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="DebugExtension.cs" />
     <Compile Include="Frame.cs" />
     <Compile Include="FrameController.cs" />
     <Compile Include="FrameServerConnection.cs" />
