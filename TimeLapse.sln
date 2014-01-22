@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-GUI", "TimeLapse\TimeLapse-GUI.csproj", "{A12D0841-3959-4118-8192-31BA63F1457D}"
-EndProject
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-Core", "TimeLapse-Core\TimeLapse-Core.csproj", "{626B3D68-6640-472C-8165-3973CAD6B217}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-CLI", "TimeLapse-CLI\TimeLapse-CLI.csproj", "{EE4F2923-FC48-4316-B3A7-21774CEBF229}"
 	ProjectSection(ProjectDependencies) = postProject
 		{626B3D68-6640-472C-8165-3973CAD6B217} = {626B3D68-6640-472C-8165-3973CAD6B217}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-GUI", "TimeLapse-GUI\TimeLapse-GUI.csproj", "{A12D0841-3959-4118-8192-31BA63F1457D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,16 +20,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|x86.ActiveCfg = Debug|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|x86.Build.0 = Debug|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Any CPU.ActiveCfg = Release|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|x86.ActiveCfg = Release|x86
-		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|x86.Build.0 = Release|x86
 		{626B3D68-6640-472C-8165-3973CAD6B217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{626B3D68-6640-472C-8165-3973CAD6B217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{626B3D68-6640-472C-8165-3973CAD6B217}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -50,6 +40,16 @@ Global
 		{EE4F2923-FC48-4316-B3A7-21774CEBF229}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EE4F2923-FC48-4316-B3A7-21774CEBF229}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EE4F2923-FC48-4316-B3A7-21774CEBF229}.Release|x86.ActiveCfg = Release|Any CPU
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|x86.ActiveCfg = Debug|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Debug|x86.Build.0 = Debug|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Any CPU.ActiveCfg = Release|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|x86.ActiveCfg = Release|x86
+		{A12D0841-3959-4118-8192-31BA63F1457D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
