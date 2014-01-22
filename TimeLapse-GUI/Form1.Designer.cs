@@ -43,6 +43,7 @@
             this.chooseImageButton = new System.Windows.Forms.Button();
             this.captureButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
+            this.debugTextBox = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -108,7 +109,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(125, 322);
+            this.dateTimePicker1.Location = new System.Drawing.Point(123, 303);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(443, 20);
             this.dateTimePicker1.TabIndex = 5;
@@ -153,11 +154,20 @@
             this.uploadButton.UseVisualStyleBackColor = true;
             this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
             // 
+            // debugTextBox
+            // 
+            this.debugTextBox.Location = new System.Drawing.Point(0, 329);
+            this.debugTextBox.Multiline = true;
+            this.debugTextBox.Name = "debugTextBox";
+            this.debugTextBox.Size = new System.Drawing.Size(595, 56);
+            this.debugTextBox.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 410);
+            this.Controls.Add(this.debugTextBox);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.captureButton);
             this.Controls.Add(this.dateTimePicker1);
@@ -195,6 +205,7 @@
         private System.Windows.Forms.Button chooseImageButton;
         private System.Windows.Forms.Button captureButton;
         private System.Windows.Forms.Button uploadButton;
+        private System.Windows.Forms.TextBox debugTextBox;
     }
 }
 

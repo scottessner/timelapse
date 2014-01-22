@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TimeLapse_Core;
 using System.IO;
+using System.Diagnostics;
 
 namespace TimeLapse_GUI
 {
@@ -17,6 +18,7 @@ namespace TimeLapse_GUI
     {
         FrameController fc = Program.controller;
         Frame myFrame;
+        TextBoxTraceListener debug;
 
         public Form1()
         {
@@ -28,6 +30,8 @@ namespace TimeLapse_GUI
             toolStripStatusLabel1.Text = "";
             fc.intervalometer.FrameReady += intervalometer_FrameReady;
             fc.server.UploadComplete += server_UploadComplete;
+            debug = new TextBoxTraceListener(debugTextBox);
+            Debug.Listeners.Add(debug);
         }
 
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)

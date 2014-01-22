@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TimeLapse_Core
 {
@@ -50,6 +51,7 @@ namespace TimeLapse_Core
 
         private void GrabFrame()
         {
+            Debug.WriteLine("Trying to grab frame");
             DateTime now = DateTime.Now;
             if (now.TimeOfDay >= StartTime.TimeOfDay && now.TimeOfDay <= StopTime.TimeOfDay)
             {
