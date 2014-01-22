@@ -16,14 +16,14 @@ namespace TimeLapse_Core
 {
     public class FrameServerConnection 
     {
-        private Uri url;
+        private string url;
         BlockingCollection<WorkItem> _taskQ = new BlockingCollection<WorkItem>(new ConcurrentStack<WorkItem>());
 
         public event UploadCompleteEventHandler UploadComplete;
 
         public FrameServerConnection(string url, int workerCount)
         {
-            this.url = new Uri(url);
+            this.url = url;
 
             // Create and start a separate Task for each consumer:
             for (int i = 0; i < workerCount; i++)
@@ -61,7 +61,6 @@ namespace TimeLapse_Core
             {
                 case WorkTask.upload:
                     UploadFrame(item.frame);
-
                     break;
                 case WorkTask.check:
                     break;
@@ -74,8 +73,7 @@ namespace TimeLapse_Core
 
         private void UploadFrame(Frame image)
         {
-            Stream imageStream = new MemoryStream();
-            image.Save(imageStream);
+            Uri fullurl = new Uri(url + "/frames");
 
             bool success = false;
             int retries = 5;
@@ -84,11 +82,12 @@ namespace TimeLapse_Core
             while(retries > 0 && success == false)
             {
                 using (var client = new HttpClient())
-                using (var content = new StreamContent(imageStream))
+                using (var content = new StringContent(image.GetJSON()))
                 {
+                    content.Headers.Remove("Content-type");
                     content.Headers.Add("Content-type", "application/json");
 
-                    var response = client.PostAsync(url, content).Result;
+                    var response = client.PostAsync(fullurl, content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         success = true;

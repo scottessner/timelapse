@@ -11,14 +11,17 @@ namespace TimeLapse_Core
 {
     public class FrameController
     {
-        Intervalometer intervalometer;
-        FrameServerConnection server;
-        ICamera camera;
+        public Intervalometer intervalometer;
+        public FrameServerConnection server;
+        public ICamera camera;
 
         public FrameController(ICamera Camera)
         {
             this.camera = Camera;
             this.intervalometer = new Intervalometer(camera, CoreSettings.Default.GrabFrequency);
+            this.intervalometer.StartTime = CoreSettings.Default.StartTime;
+            this.intervalometer.StopTime = CoreSettings.Default.StopTime;
+
             intervalometer.FrameReady += intervalometer_FrameReady;
 
             this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 1);

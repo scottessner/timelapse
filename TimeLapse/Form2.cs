@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 
-namespace TimeLapse
+namespace TimeLapse_GUI
 {
     public partial class Form2 : Form
     {

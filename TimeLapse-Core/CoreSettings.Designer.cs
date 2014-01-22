@@ -25,7 +25,7 @@ namespace TimeLapse_Core {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 05:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 04:00:00")]
         public global::System.DateTime StartTime {
             get {
                 return ((global::System.DateTime)(this["StartTime"]));
@@ -34,7 +34,7 @@ namespace TimeLapse_Core {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 18:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 19:00:00")]
         public global::System.DateTime StopTime {
             get {
                 return ((global::System.DateTime)(this["StopTime"]));
@@ -52,7 +52,7 @@ namespace TimeLapse_Core {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://test.everinview.com/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://test.everinview.com")]
         public string UploadURL {
             get {
                 return ((string)(this["UploadURL"]));

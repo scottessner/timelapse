@@ -9,11 +9,13 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using TimeLapse_Core;
+using System.IO;
 
-namespace TimeLapse
+namespace TimeLapse_GUI
 {
     public partial class Form1 : Form
     {
+        FrameController fc = Program.controller;
         Frame myFrame;
 
         public Form1()
@@ -23,7 +25,20 @@ namespace TimeLapse
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            toolStripStatusLabel1.Text = "";
+            fc.intervalometer.FrameReady += intervalometer_FrameReady;
+            fc.server.UploadComplete += server_UploadComplete;
+        }
 
+        void server_UploadComplete(object sender, UploadCompleteEventArgs e)
+        {
+
+            toolStripStatusLabel1.Text = e.frame.CaptureTime.ToString() + (e.success ? "Uploaded Successfully" : "Failed to Upload");
+        }
+
+        void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
+        {
+            pictureBox1.Image = Image.FromStream(new MemoryStream(args.frame.ImageBytes));
         }
 
 
@@ -44,12 +59,8 @@ namespace TimeLapse
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            Frame newFrame = new Frame();
-            newFrame.CaptureTime = dateTimePicker1.Value;
-            newFrame.CameraID = Int32.Parse(textBox2.Text);
-            newFrame.Image = pictureBox1.Image;
             saveFileDialog1.ShowDialog();
-            newFrame.Save(saveFileDialog1.FileName);
+            myFrame.Save(saveFileDialog1.FileName);
         }
 
         private void chooseImageButton_Click(object sender, EventArgs e)
@@ -63,11 +74,13 @@ namespace TimeLapse
 
         private void captureButton_Click(object sender, EventArgs e)
         {
-            //UbiquitiAirCam source = new UbiquitiAirCam("192.168.0.20", 5);
-            //myFrame = source.CaptureFrame();
-            //dateTimePicker1.Value = myFrame.CaptureTime;
-            //pictureBox1.Image = myFrame.Image;
-            //textBox2.Text = myFrame.CameraID.ToString();
+            myFrame = fc.camera.CaptureFrame();
+            fc.server.Upload(myFrame);
+        }
+
+        private void uploadButton_Click(object sender, EventArgs e)
+        {
+            fc.server.Upload(myFrame);
         }
 
     }

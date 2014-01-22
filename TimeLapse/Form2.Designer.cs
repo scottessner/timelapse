@@ -1,4 +1,4 @@
-﻿namespace TimeLapse
+﻿namespace TimeLapse_GUI
 {
     partial class Form2
     {

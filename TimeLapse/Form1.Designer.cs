@@ -1,4 +1,4 @@
-﻿namespace TimeLapse
+﻿namespace TimeLapse_GUI
 {
     partial class Form1
     {
@@ -42,6 +42,7 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.chooseImageButton = new System.Windows.Forms.Button();
             this.captureButton = new System.Windows.Forms.Button();
+            this.uploadButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -142,11 +143,22 @@
             this.captureButton.UseVisualStyleBackColor = true;
             this.captureButton.Click += new System.EventHandler(this.captureButton_Click);
             // 
+            // uploadButton
+            // 
+            this.uploadButton.Location = new System.Drawing.Point(33, 186);
+            this.uploadButton.Name = "uploadButton";
+            this.uploadButton.Size = new System.Drawing.Size(75, 23);
+            this.uploadButton.TabIndex = 6;
+            this.uploadButton.Text = "Upload";
+            this.uploadButton.UseVisualStyleBackColor = true;
+            this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 410);
+            this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.captureButton);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.textBox2);
@@ -182,6 +194,7 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button chooseImageButton;
         private System.Windows.Forms.Button captureButton;
+        private System.Windows.Forms.Button uploadButton;
     }
 }
 

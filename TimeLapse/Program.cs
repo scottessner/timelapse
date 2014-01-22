@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TimeLapse_Core;
 
-namespace TimeLapse
+namespace TimeLapse_GUI
 {
     public static class Program
     {
@@ -15,13 +15,16 @@ namespace TimeLapse
         //public static PictureUploader uploader = new PictureUploader("http://127.0.0.1/webcam/pictureUpload.php", 1);
         //public static GrabTimer timer = new GrabTimer(Properties.Settings.Default.GrabFrequency);
 
+        public static FrameController controller;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            FrameController controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
+            controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
+            //controller.intervalometer.StopTime = DateTime.Now.AddSeconds(-1);
             //timer.StartTime = Properties.Settings.Default.StartTime;
             //timer.StopTime = Properties.Settings.Default.StopTime;
             //timer.GrabTriggered += new EventHandler<GrabTimerEventArgs>(timer_GrabTriggered);

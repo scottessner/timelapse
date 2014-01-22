@@ -58,6 +58,11 @@ namespace TimeLapse_Core
             }
         }
 
+        public string GetJSON()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
         public void Save(string fileName)
         {
             using (FileStream stream = new FileStream(fileName,FileMode.OpenOrCreate,FileAccess.ReadWrite))
