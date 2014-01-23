@@ -24,7 +24,8 @@ namespace TimeLapse_GUI
         static void Main()
         {
             controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
-            //controller.intervalometer.StopTime = DateTime.Now.AddSeconds(-1);
+            controller.intervalometer.StartTime = DateTime.Today;
+            controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
             //timer.StartTime = Properties.Settings.Default.StartTime;
             //timer.StopTime = Properties.Settings.Default.StopTime;
             //timer.GrabTriggered += new EventHandler<GrabTimerEventArgs>(timer_GrabTriggered);

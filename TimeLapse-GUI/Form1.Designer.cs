@@ -44,6 +44,7 @@
             this.captureButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.debugTextBox = new System.Windows.Forms.TextBox();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 388);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(595, 22);
@@ -159,8 +161,15 @@
             this.debugTextBox.Location = new System.Drawing.Point(0, 329);
             this.debugTextBox.Multiline = true;
             this.debugTextBox.Name = "debugTextBox";
+            this.debugTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.debugTextBox.Size = new System.Drawing.Size(595, 56);
             this.debugTextBox.TabIndex = 7;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
             // 
             // Form1
             // 
@@ -206,6 +215,7 @@
         private System.Windows.Forms.Button captureButton;
         private System.Windows.Forms.Button uploadButton;
         private System.Windows.Forms.TextBox debugTextBox;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 

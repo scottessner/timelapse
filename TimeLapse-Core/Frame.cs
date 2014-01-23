@@ -38,6 +38,21 @@ namespace TimeLapse_Core
                 }
             }
         }
+
+        [JsonIgnore]
+        public string FileName
+        {
+            get
+            {
+                return
+                    this.CameraID
+                    + "-"
+                    + this.CaptureTime.ToString("yyyyMMdd-HHmmss")
+                    + ".eiv";
+            }
+            private set { }
+        }
+
         [JsonProperty(PropertyName = "captureTime")]
         public DateTime CaptureTime { get; set; }
 

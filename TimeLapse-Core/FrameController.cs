@@ -31,10 +31,16 @@ namespace TimeLapse_Core
 
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)
         {
-            if (!e.success)
+            if (e.success)
             {
-                string fileName = CoreSettings.Default.SavePath + e.frame.CameraID + e.frame.CaptureTime.ToString("yyyyMMddHHmmss");
-                e.frame.Save(fileName);
+                if (File.Exists(GetSaveFolder() + e.frame.FileName))
+                    File.Delete(GetSaveFolder() + e.frame.FileName);
+                if (Directory.GetFiles(GetSaveFolder()).Count() > 0 && server.GetCount() == 0)
+                    UploadFiles();
+            }
+            else
+            {
+                e.frame.Save(GetSaveFolder() + e.frame.FileName);
             }
         }
 
@@ -46,13 +52,25 @@ namespace TimeLapse_Core
 
 
         public Frame GrabFromCamera() 
-        {
-            
+        {            
             Frame thisFrame = camera.CaptureFrame();
             return thisFrame;
         }
 
+        public void UploadFiles()
+        {
+            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()))
+            {
+                server.Upload(Frame.FromFile(fileName));
+            }
+        }
 
-
+        public string GetSaveFolder()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                    + Path.DirectorySeparatorChar
+                    + "TimeLapse"
+                    + Path.DirectorySeparatorChar;
+        }
     }
 }

@@ -61,7 +61,7 @@ namespace TimeLapse_Core {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("timelapse")]
         public string SavePath {
             get {
                 return ((string)(this["SavePath"]));

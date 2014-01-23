@@ -11,10 +11,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace TimeLapse_Core
 {
-    public class FrameServerConnection 
+    public class FrameServerConnection : IDisposable
     {
         private string url;
         BlockingCollection<WorkItem> _taskQ = new BlockingCollection<WorkItem>(new ConcurrentStack<WorkItem>());
@@ -34,6 +35,8 @@ namespace TimeLapse_Core
         {
             _taskQ.Add(new WorkItem(image, WorkTask.upload));
         }
+
+
 
         public void Check(Frame image)
         {
@@ -81,19 +84,27 @@ namespace TimeLapse_Core
 
             while(retries > 0 && success == false)
             {
-                using (var client = new HttpClient())
-                using (var content = new StringContent(image.GetJSON()))
-                {
-                    content.Headers.Remove("Content-type");
-                    content.Headers.Add("Content-type", "application/json");
+                retries--;
 
-                    var response = client.PostAsync(fullurl, content).Result;
-                    if (response.IsSuccessStatusCode)
+                try
+                {
+                    using (var client = new HttpClient())
+                    using (var content = new StringContent(image.GetJSON()))
                     {
-                        success = true;
+                        content.Headers.Remove("Content-type");
+                        content.Headers.Add("Content-type", "application/json");
+
+                        var response = client.PostAsync(fullurl, content).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            success = true;
+                        }
                     }
                 }
-                retries--;
+                catch (Exception ex)
+                {
+                    DebugExtension.TimeStampedWriteLine("Upload Error: " + ex.Message);
+                }
             }
 
             UploadCompleteEventArgs args = new UploadCompleteEventArgs(image, success);
@@ -120,6 +131,8 @@ namespace TimeLapse_Core
             this.frame = frame;
             this.task = task;
         }
+
+
     }
 
     enum WorkTask

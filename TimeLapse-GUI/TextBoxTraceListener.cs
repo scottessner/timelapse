@@ -33,7 +33,7 @@ namespace TimeLapse_GUI
         {
             // No need to lock text box as this function will only 
             // ever be executed from the UI thread
-            _target.Text += message;
+            _target.AppendText(message);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace TimeLapse_GUI
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)
         {
 
-            toolStripStatusLabel1.Text = e.frame.CaptureTime.ToString() + (e.success ? "Uploaded Successfully" : "Failed to Upload");
+            toolStripStatusLabel1.Text = e.frame.CaptureTime.ToString() + " " + (e.success ? "Uploaded Successfully" : "Failed to Upload");
         }
 
         void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
@@ -58,7 +58,7 @@ namespace TimeLapse_GUI
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            toolStripStatusLabel2.Text = "Queue: " + fc.server.GetCount().ToString();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
