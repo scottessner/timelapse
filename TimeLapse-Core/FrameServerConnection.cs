@@ -92,6 +92,7 @@ namespace TimeLapse_Core
                     using (var client = new HttpClient())
                     using (var content = new StringContent(image.GetJSON()))
                     {
+                        client.Timeout = new TimeSpan(0, 0, 30);
                         content.Headers.Remove("Content-type");
                         content.Headers.Add("Content-type", "application/json");
 
@@ -112,6 +113,7 @@ namespace TimeLapse_Core
             }
 
             DebugExtension.TimeStampedWriteLine(success ? "Frame Uploaded Successfully" : "Upload Failed");
+            DebugExtension.TimeStampedWriteLine("Frames Waiting in Queue: " + _taskQ.Count.ToString());
             UploadCompleteEventArgs args = new UploadCompleteEventArgs(image, success);
             OnUploadCompleted(args);
         }
