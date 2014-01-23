@@ -76,6 +76,7 @@ namespace TimeLapse_Core
 
         private void UploadFrame(Frame image)
         {
+            DebugExtension.TimeStampedWriteLine("Attempting to Upload Frame");
             Uri fullurl = new Uri(url + "/frames");
 
             bool success = false;
@@ -94,7 +95,10 @@ namespace TimeLapse_Core
                         content.Headers.Remove("Content-type");
                         content.Headers.Add("Content-type", "application/json");
 
+                        DebugExtension.TimeStampedWriteLine("Upload: Attempting to Send");
                         var response = client.PostAsync(fullurl, content).Result;
+
+                        DebugExtension.TimeStampedWriteLine("Upload Response: " + response.StatusCode);
                         if (response.IsSuccessStatusCode)
                         {
                             success = true;
@@ -107,6 +111,7 @@ namespace TimeLapse_Core
                 }
             }
 
+            DebugExtension.TimeStampedWriteLine(success ? "Frame Uploaded Successfully" : "Upload Failed");
             UploadCompleteEventArgs args = new UploadCompleteEventArgs(image, success);
             OnUploadCompleted(args);
         }

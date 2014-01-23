@@ -58,6 +58,7 @@ namespace TimeLapse_Core
                 Frame currentFrame = cam.CaptureFrame();
                 if (currentFrame != null)
                 {
+                    DebugExtension.TimeStampedWriteLine("Frame grabbed.  Image size: " + currentFrame.ImageBytes.Count().ToString());
                     FrameReadyEventArgs args = new FrameReadyEventArgs(currentFrame);
                     OnFrameGrabbed(args);
                 }

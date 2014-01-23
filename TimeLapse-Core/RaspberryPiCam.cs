@@ -7,7 +7,7 @@ using System.IO;
 
 namespace TimeLapse_Core
 {
-    class RaspberryPiCam : ICamera
+    public class RaspberryPiCam : ICamera
     {
 
         public int UniqueID { get; private set; }
@@ -35,12 +35,15 @@ namespace TimeLapse_Core
 
             Process raspistill = new Process();
             raspistill.StartInfo.FileName = "raspistill";
-            raspistill.StartInfo.Arguments = "";
+            raspistill.StartInfo.Arguments = "-w 1280 -h 720 -o -";
+            raspistill.StartInfo.UseShellExecute = false;
+            raspistill.StartInfo.RedirectStandardOutput = true;
             raspistill.Start();
-            raspistill.WaitForExit();
 
             MemoryStream ms = new MemoryStream();
             raspistill.StandardOutput.BaseStream.CopyTo(ms);
+
+            raspistill.WaitForExit();
 
             grabbedImage = ms.ToArray();
 

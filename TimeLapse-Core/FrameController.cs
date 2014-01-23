@@ -27,6 +27,8 @@ namespace TimeLapse_Core
 
             this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 1);
             server.UploadComplete += server_UploadComplete;
+
+            DebugExtension.TimeStampedWriteLine("Save Folder: " + GetSaveFolder());
         }
 
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)
