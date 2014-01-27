@@ -42,12 +42,13 @@ namespace TimeLapse_Core
             }
             else
             {
-                e.frame.Save(GetSaveFolder() + e.frame.FileName);
+                //e.frame.Save(GetSaveFolder() + e.frame.FileName);
             }
         }
 
         void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
         {
+            args.frame.Save(GetSaveFolder() + args.frame.FileName);
             server.Upload(args.frame);
         }
 
@@ -63,6 +64,7 @@ namespace TimeLapse_Core
         {
             foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()))
             {
+                DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
                 server.Upload(Frame.FromFile(fileName));
             }
         }

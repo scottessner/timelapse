@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TimeLapse_Core;
 using System.Diagnostics;
@@ -17,9 +18,15 @@ namespace TimeLapse_CLI
             ConsoleTraceListener debug = new ConsoleTraceListener();
             Debug.Listeners.Add(debug);
 
-            controller = new FrameController(new RaspberryPiCam(2));
+            Thread.Sleep(30000);
 
-            while (true) { }
+            controller = new FrameController(new RaspberryPiCam(2));
+            controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
+
+            while (true) 
+            {
+                Thread.Sleep(250);
+            }
         }
     }
 }
