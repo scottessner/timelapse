@@ -45,7 +45,8 @@ namespace TimeLapse_Core
 
             raspistill.WaitForExit();
 
-            grabbedImage = ms.ToArray();
+            if (raspistill.ExitCode == 0)
+                grabbedImage = ms.ToArray();
 
             return grabbedImage;
 
