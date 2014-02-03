@@ -62,10 +62,17 @@ namespace TimeLapse_Core
 
         public void UploadFiles()
         {
-            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()))
+            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()).Take(100))
             {
-                DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
-                server.Upload(Frame.FromFile(fileName));
+                try
+                {
+                    DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
+                    server.Upload(Frame.FromFile(fileName));
+                }
+                catch (Exception ex)
+                {
+                    DebugExtension.TimeStampedWriteLine("File error: " + ex.Message);
+                }
             }
         }
 
