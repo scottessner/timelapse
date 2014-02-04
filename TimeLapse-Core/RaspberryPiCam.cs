@@ -35,7 +35,7 @@ namespace TimeLapse_Core
 
             Process raspistill = new Process();
             raspistill.StartInfo.FileName = "raspistill";
-            raspistill.StartInfo.Arguments = "-w 1280 -h 720 -rot 180 -q 15 -o -";
+            raspistill.StartInfo.Arguments = "-w 1280 -h 720 -rot 270 -q 15 -o -";
             raspistill.StartInfo.UseShellExecute = false;
             raspistill.StartInfo.RedirectStandardOutput = true;
             raspistill.Start();

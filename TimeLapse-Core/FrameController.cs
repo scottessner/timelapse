@@ -7,6 +7,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+using System.Timers;
 
 namespace TimeLapse_Core
 {
@@ -15,6 +16,7 @@ namespace TimeLapse_Core
         public Intervalometer intervalometer;
         public FrameServerConnection server;
         public ICamera camera;
+        public Timer cacheTimer;
 
         public FrameController(ICamera Camera)
         {
@@ -28,7 +30,18 @@ namespace TimeLapse_Core
             this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 1);
             server.UploadComplete += server_UploadComplete;
 
+            cacheTimer = new Timer(60000);
+            cacheTimer.AutoReset = true;
+            cacheTimer.Elapsed += cacheTimer_Elapsed;
+            cacheTimer.Start();
+
             DebugExtension.TimeStampedWriteLine("Save Folder: " + GetSaveFolder());
+        }
+
+        void cacheTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (Directory.GetFiles(GetSaveFolder()).Count() > 0 && server.GetCount() == 0)
+                UploadFiles();
         }
 
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)
@@ -37,12 +50,6 @@ namespace TimeLapse_Core
             {
                 if (File.Exists(GetSaveFolder() + e.frame.FileName))
                     File.Delete(GetSaveFolder() + e.frame.FileName);
-                if (Directory.GetFiles(GetSaveFolder()).Count() > 0 && server.GetCount() == 0)
-                    UploadFiles();
-            }
-            else
-            {
-                //e.frame.Save(GetSaveFolder() + e.frame.FileName);
             }
         }
 
@@ -62,7 +69,7 @@ namespace TimeLapse_Core
 
         public void UploadFiles()
         {
-            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()))
+            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()).Take(100))
             {
                 DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
                 server.Upload(Frame.FromFile(fileName));

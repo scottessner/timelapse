@@ -18,8 +18,6 @@ namespace TimeLapse_CLI
             ConsoleTraceListener debug = new ConsoleTraceListener();
             Debug.Listeners.Add(debug);
 
-            Thread.Sleep(30000);
-
             controller = new FrameController(new RaspberryPiCam(2));
             controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
 
