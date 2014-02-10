@@ -19,7 +19,7 @@ namespace TimeLapse_CLI
             Debug.Listeners.Add(debug);
 
             controller = new FrameController(new RaspberryPiCam(2));
-            controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
+            //controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
 
             while (true) 
             {
