@@ -51,10 +51,10 @@ namespace TimeLapse_Core
 
         private void GrabFrame()
         {
-            DebugExtension.TimeStampedWriteLine("Trying to grab frame");
             DateTime now = DateTime.Now;
             if (now.TimeOfDay >= StartTime.TimeOfDay && now.TimeOfDay <= StopTime.TimeOfDay)
             {
+                DebugExtension.TimeStampedWriteLine("Trying to grab frame");
                 Frame currentFrame = cam.CaptureFrame();
                 if (currentFrame != null)
                 {

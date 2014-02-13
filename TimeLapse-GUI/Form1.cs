@@ -59,6 +59,7 @@ namespace TimeLapse_GUI
         private void timer1_Tick(object sender, EventArgs e)
         {
             toolStripStatusLabel2.Text = "Queue: " + fc.server.GetCount().ToString();
+            toolStripStatusLabel3.Text = "Consumer Status: " + String.Join(", ",fc.server.GetThreadStatus());
         }
 
         private void saveButton_Click(object sender, EventArgs e)

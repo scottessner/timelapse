@@ -19,16 +19,17 @@ namespace TimeLapse_Core
     {
         private string url;
         BlockingCollection<WorkItem> _taskQ = new BlockingCollection<WorkItem>(new ConcurrentStack<WorkItem>());
+        Task[] consumer;
 
         public event UploadCompleteEventHandler UploadComplete;
 
         public FrameServerConnection(string url, int workerCount)
         {
             this.url = url;
-
+            consumer = new Task[workerCount];
             // Create and start a separate Task for each consumer:
             for (int i = 0; i < workerCount; i++)
-                Task.Factory.StartNew(Consume);
+                consumer[i] = Task.Factory.StartNew(Consume);
         }
 
         public void Upload(Frame image)
@@ -36,7 +37,16 @@ namespace TimeLapse_Core
             _taskQ.Add(new WorkItem(image, WorkTask.upload));
         }
 
+        public string[] GetThreadStatus()
+        {
+            List<string> result = new List<string>();
+            foreach (Task task in consumer)
+            {
+                result.Add(task.Status.ToString());
+            }
 
+            return result.ToArray();
+        }
 
         public void Check(Frame image)
         {

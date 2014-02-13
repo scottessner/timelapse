@@ -27,7 +27,7 @@ namespace TimeLapse_Core
 
             intervalometer.FrameReady += intervalometer_FrameReady;
 
-            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 1);
+            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 2);
             server.UploadComplete += server_UploadComplete;
 
             cacheTimer = new Timer(60000);
@@ -40,6 +40,7 @@ namespace TimeLapse_Core
 
         void cacheTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            DebugExtension.TimeStampedWriteLine("Consumer Status: " + String.Join(", ",server.GetThreadStatus()));
             if (Directory.GetFiles(GetSaveFolder()).Count() > 0 && server.GetCount() == 0)
                 UploadFiles();
         }
@@ -69,18 +70,19 @@ namespace TimeLapse_Core
 
         public void UploadFiles()
         {
-            foreach(string fileName in Directory.EnumerateFiles(GetSaveFolder()).Take(100))
+            try
             {
-                try
+                foreach (string fileName in Directory.EnumerateFiles(GetSaveFolder()).Take(100))
                 {
-                DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
-                server.Upload(Frame.FromFile(fileName));
-            }
-                catch (Exception ex)
-                {
-                    DebugExtension.TimeStampedWriteLine("File error: " + ex.Message);
+                    DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
+                    server.Upload(Frame.FromFile(fileName));
                 }
             }
+            catch (Exception ex)
+            {
+                DebugExtension.TimeStampedWriteLine("File error: " + ex.Message);
+            }
+            
         }
 
         public string GetSaveFolder()
