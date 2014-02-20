@@ -72,7 +72,13 @@ namespace TimeLapse_Core
         {
             try
             {
-                foreach (string fileName in Directory.EnumerateFiles(GetSaveFolder()).Take(100))
+                List<Frame> stack = server.GetStack();
+
+                IEnumerable<String> filenames = stack.Select(f => f.FileName);
+
+                IEnumerable<String> savedFiles = Directory.EnumerateFiles(GetSaveFolder()).Take(100).Except(filenames);
+
+                foreach (string fileName in savedFiles)
                 {
                     DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
                     server.Upload(Frame.FromFile(fileName));

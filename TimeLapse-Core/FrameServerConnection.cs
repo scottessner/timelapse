@@ -68,6 +68,18 @@ namespace TimeLapse_Core
             return _taskQ.Count();
         }
 
+        public List<Frame> GetStack()
+        {
+            List<Frame> outList = new List<Frame>();
+
+            foreach (WorkItem item in _taskQ.ToArray())
+            {
+                outList.Add(item.frame);
+            }
+
+            return outList;
+        }
+
         private void Process(WorkItem item)
         {
             switch(item.task)
@@ -106,13 +118,14 @@ namespace TimeLapse_Core
                         content.Headers.Remove("Content-type");
                         content.Headers.Add("Content-type", "application/json");
 
-                        DebugExtension.TimeStampedWriteLine("Upload: Attempting to Send");
+                        DebugExtension.TimeStampedWriteLine("Upload: Attempting to Send " + image.FileName);
                         var response = client.PostAsync(fullurl, content).Result;
 
-                        DebugExtension.TimeStampedWriteLine("Upload Response: " + response.StatusCode);
+                        DebugExtension.TimeStampedWriteLine(image.FileName + " Upload Response: " + response.StatusCode);
                         if (response.IsSuccessStatusCode)
                         {
                             success = true;
+
                         }
                     }
                 }
