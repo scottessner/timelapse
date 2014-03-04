@@ -80,7 +80,7 @@ namespace TimeLapse_Core
 
         public void Save(string fileName)
         {
-            using (FileStream stream = new FileStream(fileName,FileMode.OpenOrCreate,FileAccess.ReadWrite))
+            using (FileStream stream = new FileStream(fileName,FileMode.Create,FileAccess.ReadWrite))
             {
                 Save(stream);
             }
