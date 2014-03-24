@@ -5,15 +5,13 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using TimeLapse_Core;
+using NLog;
 
 namespace TimeLapse_GUI
 {
     public static class Program
     {
-        //public static WebUpdater updater = new WebUpdater(Properties.Settings.Default.CameraURL);
-        //public static PictureUploader uploader = new PictureUploader(Properties.Settings.Default.UploadURL, 1);
-        //public static PictureUploader uploader = new PictureUploader("http://127.0.0.1/webcam/pictureUpload.php", 1);
-        //public static GrabTimer timer = new GrabTimer(Properties.Settings.Default.GrabFrequency);
+        static Logger logInstance = LogManager.GetLogger("Main");
 
         public static FrameController controller;
 
@@ -23,21 +21,21 @@ namespace TimeLapse_GUI
         [STAThread]
         static void Main()
         {
-            controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
-            //controller.intervalometer.StartTime = DateTime.Today;
-            //controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
-            //timer.StartTime = Properties.Settings.Default.StartTime;
-            //timer.StopTime = Properties.Settings.Default.StopTime;
-            //timer.GrabTriggered += new EventHandler<GrabTimerEventArgs>(timer_GrabTriggered);
+            try
+            {
+                controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
+                logInstance.Debug("Created Controller");
+                //controller.intervalometer.StartTime = DateTime.Today;
+                //controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new Form1());
+            }
+            catch (Exception ex)
+            {
+                logInstance.ErrorException("General Error Encountered", ex);
+            }
         }
-
-        //private static void timer_GrabTriggered(object sender, GrabTimerEventArgs e)
-        //{
-        //    Task.Factory.StartNew<Frame>(() => Program.updater.PhoneHome()).ContinueWith(ant => uploader.SendImage(ant.Result));
-        //}
     }
 }

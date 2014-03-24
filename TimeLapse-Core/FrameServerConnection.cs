@@ -12,11 +12,13 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.ComponentModel;
 using System.Diagnostics;
+using NLog;
 
 namespace TimeLapse_Core
 {
     public class FrameServerConnection : IDisposable
     {
+        private Logger logInstance = LogManager.GetLogger("FrameServerConnection");
         private string url;
         BlockingCollection<WorkItem> _taskQ = new BlockingCollection<WorkItem>(new ConcurrentStack<WorkItem>());
         Task[] consumer;
@@ -29,12 +31,16 @@ namespace TimeLapse_Core
             consumer = new Task[workerCount];
             // Create and start a separate Task for each consumer:
             for (int i = 0; i < workerCount; i++)
+            {
                 consumer[i] = Task.Factory.StartNew(Consume);
+                logInstance.Info("Worker Thread {0} Created", i);
+            }
         }
 
         public void Upload(Frame image)
         {
             _taskQ.Add(new WorkItem(image, WorkTask.upload));
+            logInstance.Debug(image.FileName + "was added to the upload queue");
         }
 
         public string[] GetThreadStatus()
