@@ -16,12 +16,31 @@ using NLog;
 
 namespace TimeLapse_Core
 {
+    /// <summary>
+    /// Class for connecting to Webcam HTTP Server
+    /// </summary>
     public class FrameServerConnection : IDisposable
     {
+        /// <summary>
+        /// NLog Logger Instance
+        /// </summary>
         private Logger logInstance = LogManager.GetLogger("FrameServerConnection");
+        
+        /// <summary>
+        /// URL of web server
+        /// </summary>
         private string url;
+
+        /// <summary>
+        /// Stack of Items to Upload.  Always prioritizes sending the most recent image first.
+        /// </summary>
         BlockingCollection<WorkItem> _taskQ = new BlockingCollection<WorkItem>(new ConcurrentStack<WorkItem>());
+
+        /// <summary>
+        /// Reference to the Stack Consumer Threads
+        /// </summary>
         Task[] consumer;
+
 
         public event UploadCompleteEventHandler UploadComplete;
 
@@ -40,7 +59,7 @@ namespace TimeLapse_Core
         public void Upload(Frame image)
         {
             _taskQ.Add(new WorkItem(image, WorkTask.upload));
-            logInstance.Debug(image.FileName + "was added to the upload queue");
+            logInstance.Debug(image.FileName + " was added to the upload queue");
         }
 
         public string[] GetThreadStatus()
@@ -66,7 +85,7 @@ namespace TimeLapse_Core
             // This sequence that we’re enumerating will block when no elements
             // are available and will end when CompleteAdding is called. 
             foreach (WorkItem item in _taskQ.GetConsumingEnumerable())
-                Process(item);     // Perform task.
+                ProcessWorkItem(item);     // Perform task.
         }
 
         public int GetCount()
@@ -86,7 +105,11 @@ namespace TimeLapse_Core
             return outList;
         }
 
-        private void Process(WorkItem item)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        private void ProcessWorkItem(WorkItem item)
         {
             switch(item.task)
             {
@@ -101,10 +124,13 @@ namespace TimeLapse_Core
         }
 
 
-
-        private void UploadFrame(Frame image)
+        /// <summary>
+        /// Posts a JSON representation of a frame to the "/frames" page of the website
+        /// </summary>
+        /// <param name="pFrame">Frame to upload</param>
+        private void UploadFrame(Frame pFrame)
         {
-            DebugExtension.TimeStampedWriteLine("Attempting to Upload Frame");
+            logInstance.Debug("Attempting to Upload " + pFrame.FileName);
             Uri fullurl = new Uri(url + "/frames");
 
             bool success = false;
@@ -118,16 +144,16 @@ namespace TimeLapse_Core
                 try
                 {
                     using (var client = new HttpClient())
-                    using (var content = new StringContent(image.GetJSON()))
+                    using (var content = new StringContent(pFrame.GetJSON()))
                     {
                         client.Timeout = new TimeSpan(0, 0, 30);
                         content.Headers.Remove("Content-type");
                         content.Headers.Add("Content-type", "application/json");
 
-                        DebugExtension.TimeStampedWriteLine("Upload: Attempting to Send " + image.FileName);
+                        logInstance.Debug("Attempting to Send " + pFrame.FileName);
                         var response = client.PostAsync(fullurl, content).Result;
 
-                        DebugExtension.TimeStampedWriteLine(image.FileName + " Upload Response: " + response.StatusCode);
+                        logInstance.Debug(pFrame.FileName + " Upload Response: " + response.StatusCode);
                         if (response.IsSuccessStatusCode)
                         {
                             success = true;
@@ -137,13 +163,11 @@ namespace TimeLapse_Core
                 }
                 catch (Exception ex)
                 {
-                    DebugExtension.TimeStampedWriteLine("Upload Error: " + ex.Message);
+                    logInstance.ErrorException(pFrame.FileName + " Upload Error",ex);
                 }
             }
 
-            DebugExtension.TimeStampedWriteLine(success ? "Frame Uploaded Successfully" : "Upload Failed");
-            DebugExtension.TimeStampedWriteLine("Frames Waiting in Queue: " + _taskQ.Count.ToString());
-            UploadCompleteEventArgs args = new UploadCompleteEventArgs(image, success);
+            UploadCompleteEventArgs args = new UploadCompleteEventArgs(pFrame, success);
             OnUploadCompleted(args);
         }
 
@@ -167,8 +191,6 @@ namespace TimeLapse_Core
             this.frame = frame;
             this.task = task;
         }
-
-
     }
 
     enum WorkTask
@@ -191,3 +213,5 @@ namespace TimeLapse_Core
         }
     }
 }
+.
+.*/
