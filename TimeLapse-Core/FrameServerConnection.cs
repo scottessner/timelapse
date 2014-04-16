@@ -213,5 +213,3 @@ namespace TimeLapse_Core
         }
     }
 }
-.
-.*/

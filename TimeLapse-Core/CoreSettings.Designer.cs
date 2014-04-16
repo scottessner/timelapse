@@ -34,7 +34,7 @@ namespace TimeLapse_Core {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 20:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("11/27/2013 21:00:00")]
         public global::System.DateTime StopTime {
             get {
                 return ((global::System.DateTime)(this["StopTime"]));
