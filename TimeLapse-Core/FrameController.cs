@@ -49,8 +49,8 @@ namespace TimeLapse_Core
         {
             logInstance.Debug("Consumer Status: {0}", String.Join(", ", server.GetThreadStatus()));
             DebugExtension.TimeStampedWriteLine("Consumer Status: " + String.Join(", ",server.GetThreadStatus()));
-            if (Directory.GetFiles(GetSaveFolder()).Count() > workerCount && server.GetCount() == 0)
-                UploadFiles();
+            //if (Directory.GetFiles(GetSaveFolder()).Count() > workerCount && server.GetCount() == 0)
+                //UploadFiles();
         }
 
         void server_UploadComplete(object sender, UploadCompleteEventArgs e)
