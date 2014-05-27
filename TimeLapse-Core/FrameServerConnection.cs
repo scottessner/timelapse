@@ -153,6 +153,7 @@ namespace TimeLapse_Core
                         logInstance.Debug("Attempting to Send " + pFrame.FileName);
                         var response = client.PostAsync(fullurl, content).Result;
 
+                        logInstance.Debug("Post Completed or Timed Out");
                         logInstance.Debug(pFrame.FileName + " Upload Response: " + response.StatusCode);
                         if (response.IsSuccessStatusCode)
                         {
