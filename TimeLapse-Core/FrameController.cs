@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Timers;
+using NLog;
 
 namespace TimeLapse_Core
 {
@@ -17,6 +18,8 @@ namespace TimeLapse_Core
         public FrameServerConnection server;
         public ICamera camera;
         public Timer cacheTimer;
+        public Logger logInstance = LogManager.GetLogger("FrameController");
+        private int workerCount = 2;
 
         public FrameController(ICamera Camera)
         {
@@ -25,23 +28,28 @@ namespace TimeLapse_Core
             this.intervalometer.StartTime = CoreSettings.Default.StartTime;
             this.intervalometer.StopTime = CoreSettings.Default.StopTime;
 
+            logInstance.Info("Created FrameController Instance");
+
             intervalometer.FrameReady += intervalometer_FrameReady;
 
-            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, 2);
+            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, workerCount);
             server.UploadComplete += server_UploadComplete;
+
+            logInstance.Info("FrameServerConnection created");
 
             cacheTimer = new Timer(60000);
             cacheTimer.AutoReset = true;
             cacheTimer.Elapsed += cacheTimer_Elapsed;
             cacheTimer.Start();
 
-            DebugExtension.TimeStampedWriteLine("Save Folder: " + GetSaveFolder());
+            logInstance.Info("Image Cache Folder set to {0}", GetSaveFolder());
         }
 
         void cacheTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            logInstance.Debug("Consumer Status: {0}", String.Join(", ", server.GetThreadStatus()));
             DebugExtension.TimeStampedWriteLine("Consumer Status: " + String.Join(", ",server.GetThreadStatus()));
-            if (Directory.GetFiles(GetSaveFolder()).Count() > 0 && server.GetCount() == 0)
+            if (Directory.GetFiles(GetSaveFolder()).Count() > workerCount && server.GetCount() == 0)
                 UploadFiles();
         }
 
@@ -50,7 +58,10 @@ namespace TimeLapse_Core
             if (e.success)
             {
                 if (File.Exists(GetSaveFolder() + e.frame.FileName))
+                {
                     File.Delete(GetSaveFolder() + e.frame.FileName);
+                    logInstance.Debug("Deleting {0}", e.frame.FileName);
+                }   
             }
         }
 
@@ -80,13 +91,13 @@ namespace TimeLapse_Core
 
                 foreach (string fileName in savedFiles)
                 {
-                    DebugExtension.TimeStampedWriteLine("Adding : " + fileName + " to upload queue");
+                    logInstance.Debug("Adding : {0} to upload queue", fileName);
                     server.Upload(Frame.FromFile(fileName));
                 }
             }
             catch (Exception ex)
             {
-                DebugExtension.TimeStampedWriteLine("File error: " + ex.Message);
+                logInstance.ErrorException("File error", ex);
             }
             
         }
