@@ -107,6 +107,8 @@ namespace TimeLapse_Core
             return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + Path.DirectorySeparatorChar
                     + "TimeLapse"
+                    + Path.DirectorySeparatorChar
+                    + "ImageCache"
                     + Path.DirectorySeparatorChar;
         }
     }
