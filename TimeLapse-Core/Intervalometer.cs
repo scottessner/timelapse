@@ -5,11 +5,15 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using NLog;
 
 namespace TimeLapse_Core
 {
     public class Intervalometer
     {
+        //Create Logging Instance
+        public Logger logInstance = LogManager.GetLogger("Intervalometer");
+
         public int interval { get; set; }
 
         private DateTime startTime = DateTime.Today;
@@ -28,12 +32,14 @@ namespace TimeLapse_Core
         {
             this.cam = cam;
             this.interval = interval;
+            logInstance.Info("A {0} with id of {1} was created", cam.GetType().ToString(), cam.UniqueID);
 
             baseTimer = new Timer();
             baseTimer.AutoReset = false;
             baseTimer.Elapsed += new System.Timers.ElapsedEventHandler(baseTimer_Elapsed);
             baseTimer.Interval = GetInterval();
             baseTimer.Start();
+
         }
 
         private double GetInterval()
@@ -54,11 +60,11 @@ namespace TimeLapse_Core
             DateTime now = DateTime.Now;
             if (now.TimeOfDay >= StartTime.TimeOfDay && now.TimeOfDay <= StopTime.TimeOfDay)
             {
-                DebugExtension.TimeStampedWriteLine("Trying to grab frame");
+                logInstance.Debug("Trying to Grab Frame");
                 Frame currentFrame = cam.CaptureFrame();
                 if (currentFrame != null)
                 {
-                    DebugExtension.TimeStampedWriteLine("Frame grabbed.  Image size: " + currentFrame.ImageBytes.Count().ToString());
+                    logInstance.Debug("Frame grabbed.  Image size: {0} ", currentFrame.ImageBytes.Count().ToString());
                     FrameReadyEventArgs args = new FrameReadyEventArgs(currentFrame);
                     OnFrameGrabbed(args);
                 }
