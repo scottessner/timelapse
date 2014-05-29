@@ -21,18 +21,18 @@ namespace TimeLapse_Core
         public Logger logInstance = LogManager.GetLogger("FrameController");
         private int workerCount = 2;
 
-        public FrameController(ICamera Camera)
+        public FrameController(ICamera Camera, int GrabFrequency, DateTime StartTime, DateTime StopTime, string UploadURL, int WorkerCount)
         {
             this.camera = Camera;
-            this.intervalometer = new Intervalometer(camera, CoreSettings.Default.GrabFrequency);
-            this.intervalometer.StartTime = CoreSettings.Default.StartTime;
-            this.intervalometer.StopTime = CoreSettings.Default.StopTime;
+            this.intervalometer = new Intervalometer(camera, GrabFrequency);
+            this.intervalometer.StartTime = StartTime;
+            this.intervalometer.StopTime = StopTime;
 
             logInstance.Info("Created FrameController Instance");
 
             intervalometer.FrameReady += intervalometer_FrameReady;
 
-            this.server = new FrameServerConnection(CoreSettings.Default.UploadURL, workerCount);
+            this.server = new FrameServerConnection(UploadURL, WorkerCount);
             server.UploadComplete += server_UploadComplete;
 
             logInstance.Info("FrameServerConnection created");

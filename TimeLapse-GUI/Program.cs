@@ -23,10 +23,14 @@ namespace TimeLapse_GUI
         {
             try
             {
-                controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1));
+                controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1),
+                     TimeLapseGUISettings.Default.GrabFrequency,
+                     TimeLapseGUISettings.Default.StartTime,
+                     TimeLapseGUISettings.Default.StopTime,
+                     TimeLapseGUISettings.Default.UploadURL,
+                     TimeLapseGUISettings.Default.ServerWorkerThreadCount);
+
                 logInstance.Debug("Created Controller");
-                //controller.intervalometer.StartTime = DateTime.Today;
-                //controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);

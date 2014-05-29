@@ -87,12 +87,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings1.Designer.cs">
+    <Compile Include="TimeLapseGUISettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
+      <DependentUpon>TimeLapseGUISettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="TimeLapseGUISettings.cs" />
     <Compile Include="TextBoxTraceListener.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -112,9 +112,9 @@
     </Compile>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
+    <None Include="TimeLapseGUISettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+      <LastGenOutput>TimeLapseGUISettings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

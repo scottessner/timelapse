@@ -46,10 +46,20 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeLapseCLISettings.cs" />
+    <Compile Include="TimeLapseCLISettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>TimeLapseCLISettings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="TimeLapseCLISettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>TimeLapseCLISettings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TimeLapse-Core\TimeLapse-Core.csproj">

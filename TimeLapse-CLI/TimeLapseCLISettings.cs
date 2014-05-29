@@ -1,4 +1,4 @@
-﻿namespace TimeLapse_GUI.Properties {
+﻿namespace TimeLapse_CLI {
     
     
     // This class allows you to handle specific events on the settings class:
@@ -6,9 +6,9 @@
     //  The PropertyChanged event is raised after a setting's value is changed.
     //  The SettingsLoaded event is raised after the setting values are loaded.
     //  The SettingsSaving event is raised before the setting values are saved.
-    internal sealed partial class Settings {
+    internal sealed partial class TimeLapseCLISettings {
         
-        public Settings() {
+        public TimeLapseCLISettings() {
             // // To add event handlers for saving and changing settings, uncomment the lines below:
             //
             // this.SettingChanging += this.SettingChangingEventHandler;

@@ -15,11 +15,18 @@ namespace TimeLapse_CLI
 
         static void Main(string[] args)
         {
-            ConsoleTraceListener debug = new ConsoleTraceListener();
-            Debug.Listeners.Add(debug);
 
-            controller = new FrameController(new RaspberryPiCam(2));
-            //controller.intervalometer.StopTime = DateTime.Today.AddHours(23).AddMinutes(59);
+            controller = new FrameController(
+                new RaspberryPiCam(TimeLapseCLISettings.Default.CameraID,
+                    TimeLapseCLISettings.Default.ImageWidth,
+                    TimeLapseCLISettings.Default.ImageHeight,
+                    TimeLapseCLISettings.Default.ImageRotation,
+                    TimeLapseCLISettings.Default.ImageQuality),
+                TimeLapseCLISettings.Default.GrabFrequency,
+                TimeLapseCLISettings.Default.StartTime,
+                TimeLapseCLISettings.Default.StopTime,
+                TimeLapseCLISettings.Default.WebURL,
+                TimeLapseCLISettings.Default.ServerWorkerThreadCount);
 
             while (true) 
             {

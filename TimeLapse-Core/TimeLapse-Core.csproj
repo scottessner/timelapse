@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CameraComponent.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="CoreSettings.Designer.cs">
       <AutoGen>True</AutoGen>
