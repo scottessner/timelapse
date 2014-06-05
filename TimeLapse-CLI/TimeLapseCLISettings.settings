@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="StartTime" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">2014-05-29</Value>
+      <Value Profile="(Default)">05/29/2014 05:00:00</Value>
     </Setting>
     <Setting Name="StopTime" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">05/29/2014 23:59:00</Value>
+      <Value Profile="(Default)">05/29/2014 21:00:00</Value>
     </Setting>
     <Setting Name="GrabFrequency" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>
