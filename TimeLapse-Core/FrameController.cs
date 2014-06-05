@@ -66,6 +66,7 @@ namespace TimeLapse_Core
 
         void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
         {
+            logInstance.Debug("Frame Ready Event Fired");
             args.frame.Save(GetSaveFolder() + args.frame.FileName);
             logInstance.Debug("Saving {0}{1}", GetSaveFolder(), args.frame.FileName);
             server.Upload(args.frame);
