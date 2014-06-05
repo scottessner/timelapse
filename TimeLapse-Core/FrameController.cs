@@ -42,6 +42,12 @@ namespace TimeLapse_Core
             cacheTimer.Elapsed += cacheTimer_Elapsed;
             cacheTimer.Start();
 
+            if (!Directory.Exists(GetSaveFolder()))
+            {
+                Directory.CreateDirectory(GetSaveFolder());
+                logInstance.Info("Creating Image Cache Folder");
+            }
+
             logInstance.Info("Image Cache Folder set to {0}", GetSaveFolder());
         }
 
