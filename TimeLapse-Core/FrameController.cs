@@ -101,7 +101,6 @@ namespace TimeLapse_Core
                     Frame currentFrame = Frame.FromFile(fileName);
                     if (currentFrame != null)
                     {
-                        logInstance.Debug("Frame Info {0}, {1}, {2}", currentFrame.CameraID, currentFrame.CaptureTime, currentFrame.FileName);
                         logInstance.Debug("Adding : {0} to upload queue", fileName);
                         server.Upload(currentFrame);
                     }
