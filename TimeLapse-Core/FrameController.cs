@@ -107,7 +107,7 @@ namespace TimeLapse_Core
                     else
                     {
                         logInstance.Warn("There was a problem with {0}, deleting", fileName);
-                        File.Delete(GetSaveFolder() + fileName);
+                        File.Delete(fileName);
                     }
                 }
             }
