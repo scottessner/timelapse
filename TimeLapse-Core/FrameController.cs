@@ -102,6 +102,7 @@ namespace TimeLapse_Core
                     if (currentFrame != null)
                     {
                         logInstance.Debug("Adding : {0} to upload queue", fileName);
+                        logInstance.Debug("Timestamp is {0}", currentFrame.CaptureTime.ToString());
                         server.Upload(currentFrame);
                     }
                     else
