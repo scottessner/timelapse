@@ -146,7 +146,7 @@ namespace TimeLapse_Core
                     using (var client = new HttpClient())
                     using (var content = new StringContent(pFrame.GetJSON()))
                     {
-                        client.Timeout = new TimeSpan(0, 0, 30);
+                        client.Timeout = new TimeSpan(0, 0, 120);
                         content.Headers.Remove("Content-type");
                         content.Headers.Add("Content-type", "application/json");
 
