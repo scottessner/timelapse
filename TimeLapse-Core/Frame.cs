@@ -14,7 +14,7 @@ namespace TimeLapse_Core
     [Serializable]
     public class Frame
     {
-        [JsonProperty(PropertyName = "imageBytes")]
+        [JsonProperty(PropertyName = "imageBytes", Required = Required.Always)]
         public byte[] ImageBytes;
 
         [JsonIgnore]
@@ -53,10 +53,10 @@ namespace TimeLapse_Core
             private set { }
         }
 
-        [JsonProperty(PropertyName = "captureTime")]
+        [JsonProperty(PropertyName = "captureTime", Required = Required.Always)]
         public DateTime CaptureTime { get; set; }
 
-        [JsonProperty(PropertyName = "camera_id")]
+        [JsonProperty(PropertyName = "camera_id", Required = Required.Always)]
         public int CameraID { get; set; }
         
         public Frame()
@@ -90,7 +90,7 @@ namespace TimeLapse_Core
         {
             using (StreamReader reader = new StreamReader(inStream))
             {
-                return JsonConvert.DeserializeObject<Frame>(reader.ReadToEnd());  
+                return JsonConvert.DeserializeObject<Frame>(reader.ReadToEnd());
             }
         }
 

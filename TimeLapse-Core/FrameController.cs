@@ -98,8 +98,17 @@ namespace TimeLapse_Core
 
                 foreach (string fileName in savedFiles)
                 {
-                    logInstance.Debug("Adding : {0} to upload queue", fileName);
-                    server.Upload(Frame.FromFile(fileName));
+                    Frame currentFrame = Frame.FromFile(fileName);
+                    if (currentFrame != null)
+                    {
+                        logInstance.Debug("Adding : {0} to upload queue", fileName);
+                        server.Upload(currentFrame);
+                    }
+                    else
+                    {
+                        logInstance.Warn("There was a problem with {0}, deleting", fileName);
+                        File.Delete(GetSaveFolder() + fileName);
+                    }
                 }
             }
             catch (Exception ex)
