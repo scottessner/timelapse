@@ -94,7 +94,7 @@ namespace TimeLapse_Core
 
                 IEnumerable<String> filenames = stack.Select(f => f.FileName);
 
-                IEnumerable<String> savedFiles = Directory.EnumerateFiles(GetSaveFolder()).Take(100).Except(filenames);
+                IEnumerable<String> savedFiles = Directory.EnumerateFiles(GetSaveFolder()).Take(1000).Except(filenames);
 
                 foreach (string fileName in savedFiles)
                 {
