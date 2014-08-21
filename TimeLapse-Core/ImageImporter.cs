@@ -14,7 +14,15 @@ namespace TimeLapse_Core
     {
         private string[] m_FileList;
         public int CameraID;
-        
+        public Frame[] Frames 
+        {
+            get
+            {
+                return createFrames();
+            }
+
+            private set; 
+        }
 
         public ImageImporter()
         {
@@ -36,8 +44,10 @@ namespace TimeLapse_Core
             return m_FileList;
         }
 
-        public void createFrames()
+        public Frame[] createFrames()
         {
+            List<Frame> frameList = new List<Frame>();
+
             foreach (string path in m_FileList)
             {
                 FileInfo file = new FileInfo(path);
@@ -46,7 +56,11 @@ namespace TimeLapse_Core
                 frame.CameraID = CameraID;
                 frame.CaptureTime = DateTime.ParseExact(file.Name, "yyyyMMdd-HHmmss", DateTimeFormatInfo.CurrentInfo);
                 frame.Image = Image.FromFile(path);
+
+                frameList.Add(frame);
             }
+
+            return frameList.ToArray();
 
         }
 
