@@ -151,7 +151,9 @@ namespace TimeLapse_Core
                         content.Headers.Add("Content-type", "application/json");
 
                         logInstance.Debug("Attempting to Send " + pFrame.FileName);
-                        var response = client.PostAsync(fullurl, content).Result;
+                        Task postTask = client.PostAsync(fullurl, content);
+
+                        
 
                         logInstance.Debug("Post of {0} Completed or Timed Out",pFrame.FileName);
                         logInstance.Debug(pFrame.FileName + " Upload Response: " + response.StatusCode);

@@ -66,6 +66,7 @@ namespace TimeLapse_GUI
         {
             saveFileDialog1.ShowDialog();
             myFrame.Save(saveFileDialog1.FileName);
+            
         }
 
         private void chooseImageButton_Click(object sender, EventArgs e)
