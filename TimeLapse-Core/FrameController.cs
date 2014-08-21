@@ -42,6 +42,12 @@ namespace TimeLapse_Core
             cacheTimer.Elapsed += cacheTimer_Elapsed;
             cacheTimer.Start();
 
+            if (!Directory.Exists(GetSaveFolder()))
+            {
+                Directory.CreateDirectory(GetSaveFolder());
+                logInstance.Info("Creating Image Cache Folder");
+            }
+
             logInstance.Info("Image Cache Folder set to {0}", GetSaveFolder());
         }
 
@@ -66,7 +72,9 @@ namespace TimeLapse_Core
 
         void intervalometer_FrameReady(object sender, FrameReadyEventArgs args)
         {
+            logInstance.Debug("Frame Ready Event Fired");
             args.frame.Save(GetSaveFolder() + args.frame.FileName);
+            logInstance.Debug("Saving {0}{1}", GetSaveFolder(), args.frame.FileName);
             server.Upload(args.frame);
         }
 
