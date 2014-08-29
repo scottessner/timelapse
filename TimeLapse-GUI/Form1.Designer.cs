@@ -33,6 +33,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             this.captureButton = new System.Windows.Forms.Button();
             this.uploadButton = new System.Windows.Forms.Button();
             this.debugTextBox = new System.Windows.Forms.TextBox();
-            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.importButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -83,6 +84,12 @@
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
             // 
             // timer1
             // 
@@ -126,7 +133,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(33, 52);
+            this.saveButton.Location = new System.Drawing.Point(33, 42);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 0;
@@ -136,7 +143,7 @@
             // 
             // chooseImageButton
             // 
-            this.chooseImageButton.Location = new System.Drawing.Point(33, 92);
+            this.chooseImageButton.Location = new System.Drawing.Point(33, 71);
             this.chooseImageButton.Name = "chooseImageButton";
             this.chooseImageButton.Size = new System.Drawing.Size(75, 37);
             this.chooseImageButton.TabIndex = 0;
@@ -146,7 +153,7 @@
             // 
             // captureButton
             // 
-            this.captureButton.Location = new System.Drawing.Point(33, 146);
+            this.captureButton.Location = new System.Drawing.Point(33, 114);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(75, 23);
             this.captureButton.TabIndex = 6;
@@ -156,7 +163,7 @@
             // 
             // uploadButton
             // 
-            this.uploadButton.Location = new System.Drawing.Point(33, 186);
+            this.uploadButton.Location = new System.Drawing.Point(33, 143);
             this.uploadButton.Name = "uploadButton";
             this.uploadButton.Size = new System.Drawing.Size(75, 23);
             this.uploadButton.TabIndex = 6;
@@ -176,11 +183,15 @@
             this.debugTextBox.Size = new System.Drawing.Size(595, 134);
             this.debugTextBox.TabIndex = 7;
             // 
-            // toolStripStatusLabel3
+            // importButton
             // 
-            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
+            this.importButton.Location = new System.Drawing.Point(33, 172);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(75, 23);
+            this.importButton.TabIndex = 6;
+            this.importButton.Text = "Import";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // Form1
             // 
@@ -188,6 +199,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 410);
             this.Controls.Add(this.debugTextBox);
+            this.Controls.Add(this.importButton);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.captureButton);
             this.Controls.Add(this.dateTimePicker1);
@@ -228,6 +240,7 @@
         private System.Windows.Forms.TextBox debugTextBox;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.Button importButton;
     }
 }
 

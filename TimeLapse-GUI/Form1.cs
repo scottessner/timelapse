@@ -48,6 +48,7 @@ namespace TimeLapse_GUI
 
         private void openButton_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Multiselect = false;
             openFileDialog1.ShowDialog();
             textBox1.Text = openFileDialog1.FileName;
             myFrame = Frame.FromFile(textBox1.Text);
@@ -87,6 +88,17 @@ namespace TimeLapse_GUI
         private void uploadButton_Click(object sender, EventArgs e)
         {
             fc.server.Upload(myFrame);
+        }
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            ImageImporter imp = new ImageImporter();
+            imp.CameraID = 1;
+            openFileDialog1.Multiselect = true;
+            openFileDialog1.ShowDialog();
+            imp.GetFiles(openFileDialog1.FileNames);
+            Task.Factory.StartNew( () => imp.cacheFrames(fc.GetSaveFolder()));
+            
         }
 
     }
