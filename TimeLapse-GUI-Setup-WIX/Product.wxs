@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="TimeLapse" Language="1033" Version="1.0.0.0" Manufacturer="SJE" UpgradeCode="1db16123-d177-497f-871b-7f1e2ccd8512">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="TimeLapse_GUI" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="TimeLapse_GUI" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<Component Id="GUI">
+				<File Source="$(var.TimeLapse-GUI.TargetPath)" />
+			</Component>
+      <Component Id="CORE">
+        <File Source="$(var.TimeLapse-Core.TargetPath)" />
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

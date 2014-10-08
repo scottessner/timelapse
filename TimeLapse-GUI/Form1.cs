@@ -94,9 +94,24 @@ namespace TimeLapse_GUI
         {
             ImageImporter imp = new ImageImporter();
             imp.CameraID = 1;
-            openFileDialog1.Multiselect = true;
-            openFileDialog1.ShowDialog();
-            imp.GetFiles(openFileDialog1.FileNames);
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+
+            DirectoryInfo dir = new DirectoryInfo(dialog.SelectedPath);
+
+            List<string> fileList = new List<string>();
+            foreach(FileInfo file in dir.GetFiles())
+            {
+                fileList.Add(file.FullName);
+            }
+
+            imp.GetFiles(fileList.ToArray());
+
+
+            //openFileDialog1.Multiselect = true;
+            //openFileDialog1.
+            //openFileDialog1.ShowDialog();
+            //imp.GetFiles(openFileDialog1.FileNames);
             Task.Factory.StartNew( () => imp.cacheFrames(fc.GetSaveFolder()));
             
         }
