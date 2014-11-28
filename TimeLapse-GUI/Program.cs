@@ -23,7 +23,7 @@ namespace TimeLapse_GUI
         {
             try
             {
-                controller = new FrameController(new UbiquitiAirCam("192.168.0.20", 1),
+                controller = new FrameController(new UbiquitiAirCam("192.168.142.50", 3),
                      TimeLapseGUISettings.Default.GrabFrequency,
                      TimeLapseGUISettings.Default.StartTime,
                      TimeLapseGUISettings.Default.StopTime,

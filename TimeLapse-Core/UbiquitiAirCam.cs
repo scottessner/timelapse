@@ -5,11 +5,15 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
+using NLog;
 
 namespace TimeLapse_Core
 {
     public class UbiquitiAirCam : ICamera
     {
+
+        public Logger logInstance = LogManager.GetLogger("AirCam");
+
         public string IPAddress { get; set; }
         private string CameraURL
         {
@@ -20,6 +24,7 @@ namespace TimeLapse_Core
         {
             this.IPAddress = IPAddress;
             this.UniqueID = UniqueID;
+            logInstance.Info("AirCam created with URL: {0}", CameraURL);
         }
 
         public int UniqueID { get; private set; }
@@ -32,7 +37,10 @@ namespace TimeLapse_Core
             newFrame.CameraID = this.UniqueID;
             newFrame.ImageBytes = CaptureImage();
             if (newFrame.ImageBytes != null)
+            {
+                logInstance.Debug("Frame Captured");
                 return newFrame;
+            }
             else
                 return null;
         }
