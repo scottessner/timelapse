@@ -27,7 +27,7 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="CameraID" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">2</Value>
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="ServerWorkerThreadCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">2</Value>

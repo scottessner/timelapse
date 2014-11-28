@@ -17,16 +17,12 @@ namespace TimeLapse_CLI
         {
 
             controller = new FrameController(
-                new RaspberryPiCam(TimeLapseCLISettings.Default.CameraID,
-                    TimeLapseCLISettings.Default.ImageWidth,
-                    TimeLapseCLISettings.Default.ImageHeight,
-                    TimeLapseCLISettings.Default.ImageRotation,
-                    TimeLapseCLISettings.Default.ImageQuality),
-                TimeLapseCLISettings.Default.GrabFrequency,
-                TimeLapseCLISettings.Default.StartTime,
-                TimeLapseCLISettings.Default.StopTime,
-                TimeLapseCLISettings.Default.WebURL,
-                TimeLapseCLISettings.Default.ServerWorkerThreadCount);
+                new UbiquitiAirCam("192.168.142.50",TimeLapseCLISettings.Default.CameraID),
+                    TimeLapseCLISettings.Default.GrabFrequency,
+                     TimeLapseCLISettings.Default.StartTime,
+                     TimeLapseCLISettings.Default.StopTime,
+                     TimeLapseCLISettings.Default.WebURL,
+                     TimeLapseCLISettings.Default.ServerWorkerThreadCount);
 
             while (true) 
             {
