@@ -32,6 +32,7 @@ namespace TimeLapse_Core
 
         public Frame CaptureFrame()
         {
+            logInstance.Debug("Trying to Grab Frame");
             Frame newFrame = new Frame();
             newFrame.CaptureTime = DateTime.Now;
             newFrame.CameraID = this.UniqueID;
@@ -52,8 +53,10 @@ namespace TimeLapse_Core
             //Grab Image using HTTP
             using (var client = new HttpClient())
             {
+                logInstance.Debug("Sending Frame Grab Request");
                 var response = client.GetAsync(CameraURL).Result;
-                
+
+                logInstance.Debug("Got HTTP Result");
                 if (response.IsSuccessStatusCode)
                 {
                     grabbedImage = response.Content.ReadAsByteArrayAsync().Result;
