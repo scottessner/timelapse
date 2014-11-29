@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-Core", "TimeLapse-Core\TimeLapse-Core.csproj", "{626B3D68-6640-472C-8165-3973CAD6B217}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-CLI", "TimeLapse-CLI\TimeLapse-CLI.csproj", "{EE4F2923-FC48-4316-B3A7-21774CEBF229}"
@@ -9,6 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-CLI", "TimeLapse-
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLapse-GUI", "TimeLapse-GUI\TimeLapse-GUI.csproj", "{A12D0841-3959-4118-8192-31BA63F1457D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D9A17093-DC89-4DC4-88C2-2B0548DD649F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
