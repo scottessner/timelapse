@@ -25,7 +25,7 @@ namespace TimeLapse_CLI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("05/29/2014 05:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2014-05-29")]
         public global::System.DateTime StartTime {
             get {
                 return ((global::System.DateTime)(this["StartTime"]));
@@ -37,7 +37,7 @@ namespace TimeLapse_CLI {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("05/29/2014 21:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("05/29/2014 23:59:59")]
         public global::System.DateTime StopTime {
             get {
                 return ((global::System.DateTime)(this["StopTime"]));
